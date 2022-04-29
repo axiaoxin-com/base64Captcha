@@ -1,0 +1,32 @@
+env = "localhost"
+
+
+
+[redis]
+    [redis.localhost]
+        addr = "localhost:6379"
+        password = ""
+        db = 0
+        dial_timeout = 5
+        read_timeout = 5
+        write_timeout = 5
+        pool_size = 5
+
+    [redis.prod]
+        addr = ""
+        password = ""
+        db = 0
+        dial_timeout = 5
+        read_timeout = 5
+        write_timeout = 5
+        pool_size = 5
+
+
+
+[logging]
+    level = "debug"
+
+
+
+[captcha]
+    expire_seconds = 300

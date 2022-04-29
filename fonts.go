@@ -16,11 +16,12 @@ var fontsSimple = DefaultEmbeddedFonts.LoadFontsByNames([]string{
 	"fonts/RitaSmith.ttf",
 	"fonts/actionj.ttf",
 	"fonts/chromohv.ttf",
+	"fonts/wqy-microhei.ttc",
 })
 
 //var fontemoji = loadFontByName("fonts/seguiemj.ttf")
 var fontsAll = append(fontsSimple, fontChinese)
-var fontChinese = DefaultEmbeddedFonts.LoadFontByName("fonts/wqy-microhei.ttc")
+var fontChinese = DefaultEmbeddedFonts.LoadFontByName("fonts/LXGWWenKai-Regular.ttf")
 
 //randFontFrom choose random font family.选择随机的字体
 func randFontFrom(fonts []*truetype.Font) *truetype.Font {

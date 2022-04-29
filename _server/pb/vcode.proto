@@ -1,0 +1,90 @@
+syntax = "proto3";
+package pb;
+option go_package = "vcode/pb";
+import "google/api/annotations.proto";
+
+
+// 服务接口定义
+service VcodeService {
+    // 生成验证码
+    rpc Generate(GenerateReq) returns (GenerateRsp) {
+        option (google.api.http) = {
+            post: "/generate"
+            body: "*"
+        };
+    }
+    // 校验验证码
+    rpc Verify(VerifyReq) returns (VerifyRsp) {
+        option (google.api.http) = {
+            post: "/verify"
+            body: "*"
+        };
+    }
+    // 生成原始验证码
+    rpc GenRawCode(GenRawCodeReq) returns (GenerateRsp) {
+        option (google.api.http) = {
+            post: "/gen_raw_code"
+            body: "*"
+        };
+    }
+}
+
+enum DriverEnum {
+    Digit  = 0;
+    String = 1;
+    Math = 2;
+    Chinese = 3;
+    Audio = 4;
+    Language = 5;
+}
+
+enum LangEnum {
+    Zh  = 0;
+    Latin = 1;
+    Ko = 2;
+    Jp = 3;
+    Ru = 4;
+    Th = 5;
+    Greek = 6;
+    Arabic = 7;
+    Hebrew = 8;
+}
+
+
+// Generate请求参数
+message GenerateReq {
+    int32 AppID = 1;
+    string IP = 2;
+    DriverEnum Driver = 3;
+    int32 Height = 4;
+    int32 Width = 5;
+    int32 Length = 6;
+    LangEnum Lang = 7;
+}
+
+// Generate返回结果
+message GenerateRsp {
+    string Data = 1;
+    string ID = 2;
+}
+
+// Verify请求参数
+message VerifyReq {
+    int32 AppID = 1;
+    string IP = 2;
+    string ID = 3;
+    string Answer = 4;
+}
+
+
+// 获取评论返回结果
+message VerifyRsp {
+    bool OK = 1;
+}
+
+// GenRawCode请求参数
+message GenRawCodeReq {
+    int32 AppID = 1;
+    string IP = 2;
+    int32 Length = 3;
+}
