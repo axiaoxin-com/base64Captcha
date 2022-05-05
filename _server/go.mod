@@ -1,13 +1,9 @@
-module vcode
+module github.com/axiaoxin-com/base64Captcha/_server
 
 go 1.16
 
-replace vcode/pb => ./pb
-
-replace base64Captcha => ./..
-
 require (
-	base64Captcha v0.0.0-00010101000000-000000000000
+	github.com/axiaoxin-com/base64Captcha v1.3.6
 	github.com/axiaoxin-com/goutils v1.0.30
 	github.com/axiaoxin-com/logging v1.2.15
 	github.com/go-redis/redis/v8 v8.11.5
@@ -19,5 +15,4 @@ require (
 	google.golang.org/genproto v0.0.0-20220414192740-2d67ff6cf2b4
 	google.golang.org/grpc v1.45.0
 	google.golang.org/protobuf v1.28.0
-	gorm.io/gorm v1.23.4
 )

@@ -83,6 +83,8 @@ github.com/armon/go-metrics v0.0.0-20180917152333-f0300d1749da/go.mod h1:Q73ZrmV
 github.com/armon/go-metrics v0.3.10/go.mod h1:4O98XIr/9W0sxpJ8UaYkvjk10Iff7SnFrb4QAOwNTFc=
 github.com/armon/go-radix v0.0.0-20180808171621-7fddfc383310/go.mod h1:ufUuZ+zHj4x4TnLV4JWEpy2hxWSpsRywHrMgIH9cCH8=
 github.com/armon/go-radix v1.0.0/go.mod h1:ufUuZ+zHj4x4TnLV4JWEpy2hxWSpsRywHrMgIH9cCH8=
+github.com/axiaoxin-com/base64Captcha v1.3.6 h1:6038oE2vOPDsvKTz6Uw3vUUlK4PPfLB5wwJkaPF7P6M=
+github.com/axiaoxin-com/base64Captcha v1.3.6/go.mod h1:wuXS3Tu6DHPzc69WlVq/us/QTdTDzP3ZvXl0IgZ27bA=
 github.com/axiaoxin-com/goutils v1.0.22/go.mod h1:sNzdHEXtLmJI95i/UBHMZOfHVYYLAbMVubEJ2b5mvh4=
 github.com/axiaoxin-com/goutils v1.0.30 h1:Ye167s7C+CfFTrZNNAZk8hjg3P11jk4bWQ8SQrZpWw8=
 github.com/axiaoxin-com/goutils v1.0.30/go.mod h1:VDNXsSPa2gitxANLmV6YsIt5IrPyThwGrwoAT7Bzqkg=

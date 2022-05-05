@@ -3,9 +3,10 @@
 package main
 
 import (
-	"base64Captcha"
 	"fmt"
 	"time"
+
+	"github.com/axiaoxin-com/base64Captcha"
 
 	"github.com/axiaoxin-com/goutils"
 	"github.com/axiaoxin-com/logging"

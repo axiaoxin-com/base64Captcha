@@ -7,7 +7,7 @@ import (
 	"net"
 	"net/http"
 
-	"vcode/pb"
+	"github.com/axiaoxin-com/base64Captcha/_server/pb"
 
 	"github.com/axiaoxin-com/goutils"
 	"github.com/axiaoxin-com/logging"

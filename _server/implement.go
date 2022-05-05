@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 
-	"base64Captcha"
-	"vcode/pb"
+	"github.com/axiaoxin-com/base64Captcha"
+	"github.com/axiaoxin-com/base64Captcha/_server/pb"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
