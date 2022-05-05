@@ -1,6 +1,6 @@
 syntax = "proto3";
 package pb;
-option go_package = "vcode/pb";
+option go_package = "github.com/axiaoxin-com/base64Captcha/_server/pb";
 import "google/api/annotations.proto";
 
 
