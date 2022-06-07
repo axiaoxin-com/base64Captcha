@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/axiaoxin-com/base64Captcha"
 	"github.com/axiaoxin-com/base64Captcha/_server/pb"
@@ -82,7 +83,7 @@ func (i *implement) Generate(ctx context.Context, req *pb.GenerateReq) (*pb.Gene
 func (i *implement) Verify(ctx context.Context, req *pb.VerifyReq) (*pb.VerifyRsp, error) {
 	rsp := pb.VerifyRsp{}
 	if req.GetAnswer() == "" {
-		return &rsp, nil
+		return nil, status.Error(codes.InvalidArgument, "Answer is required")
 	}
 
 	ok := RedisStore.Verify(req.GetID(), req.GetAnswer(), true)
@@ -92,13 +93,24 @@ func (i *implement) Verify(ctx context.Context, req *pb.VerifyReq) (*pb.VerifyRs
 
 // GenRawCode GenRawCode方法实现
 func (i *implement) GenRawCode(ctx context.Context, req *pb.GenRawCodeReq) (*pb.GenerateRsp, error) {
+	idTag := req.GetIDTag()
+	if idTag == "" {
+		return nil, status.Error(codes.InvalidArgument, "IDTag is required")
+	}
+	if len(idTag) > 64 {
+		return nil, status.Error(codes.InvalidArgument, "IDTag max length is 64")
+	}
 	length := req.GetLength()
 	if length == 0 {
 		length = 5
 	}
 	driver := base64Captcha.NewDriverString(1, 1, 0, 0, int(length), base64Captcha.TxtSimpleCharaters, nil, nil, nil)
 	captcha := base64Captcha.NewCaptcha(driver, RedisStore)
-	id, _, answer := captcha.Driver.GenerateIdQuestionAnswer()
+	qid, _, answer := captcha.Driver.GenerateIdQuestionAnswer()
+	id := fmt.Sprintf("%v:%v", idTag, qid)
+	if err := captcha.Store.Set(id, answer); err != nil {
+		return nil, status.Error(codes.Internal, "store set error:"+err.Error())
+	}
 	rsp := pb.GenerateRsp{
 		Data: answer,
 		ID:   id,

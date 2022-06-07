@@ -87,4 +87,5 @@ message GenRawCodeReq {
     int32 AppID = 1;
     string IP = 2;
     int32 Length = 3;
+    string IDTag = 4;
 }
