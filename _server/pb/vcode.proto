@@ -9,8 +9,7 @@ service VcodeService {
     // 生成验证码
     rpc Generate(GenerateReq) returns (GenerateRsp) {
         option (google.api.http) = {
-            post: "/generate"
-            body: "*"
+            get: "/generate"
         };
     }
     // 校验验证码
@@ -23,8 +22,7 @@ service VcodeService {
     // 生成原始验证码
     rpc GenRawCode(GenRawCodeReq) returns (GenerateRsp) {
         option (google.api.http) = {
-            post: "/gen_raw_code"
-            body: "*"
+            get: "/gen_raw_code"
         };
     }
 }
@@ -60,6 +58,8 @@ message GenerateReq {
     int32 Width = 5;
     int32 Length = 6;
     LangEnum Lang = 7;
+    double MaxSkew = 8;
+    int32 DotCount = 9;
 }
 
 // Generate返回结果

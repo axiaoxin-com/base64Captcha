@@ -1,1 +1,1 @@
-CGO_ENABLED=0 go build -o vcode
+CGO_ENABLED=0 GOOS=linux go build -o vcode

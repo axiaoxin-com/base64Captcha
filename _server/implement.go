@@ -53,17 +53,45 @@ func (i *implement) Generate(ctx context.Context, req *pb.GenerateReq) (*pb.Gene
 	var driver base64Captcha.Driver
 	switch req.GetDriver() {
 	case pb.DriverEnum_String:
-		driver = base64Captcha.NewDriverString(int(height), int(width), 0, base64Captcha.OptionShowSlimeLine|base64Captcha.OptionShowHollowLine, int(length), base64Captcha.TxtAlphabet+base64Captcha.TxtNumbers, nil, nil, nil)
+		driver = base64Captcha.NewDriverString(
+			int(height),
+			int(width),
+			0,
+			base64Captcha.OptionShowSlimeLine|base64Captcha.OptionShowHollowLine,
+			int(length),
+			base64Captcha.TxtAlphabet+base64Captcha.TxtNumbers,
+			nil,
+			nil,
+			nil,
+		)
 	case pb.DriverEnum_Math:
 		driver = base64Captcha.NewDriverMath(int(height), int(width), 1, base64Captcha.OptionShowHollowLine, nil, nil, nil)
 	case pb.DriverEnum_Chinese:
-		driver = base64Captcha.NewDriverChinese(int(height), int(width), 40, base64Captcha.OptionShowSlimeLine|base64Captcha.OptionShowHollowLine, int(length), base64Captcha.TxtChineseCharaters, nil, nil, []string{"wqy-microhei.ttc", "LXGWWenKai-Regular.ttf"})
+		driver = base64Captcha.NewDriverChinese(
+			int(height),
+			int(width),
+			40,
+			base64Captcha.OptionShowSlimeLine|base64Captcha.OptionShowHollowLine,
+			int(length),
+			base64Captcha.TxtChineseCharaters,
+			nil,
+			nil,
+			[]string{"wqy-microhei.ttc", "LXGWWenKai-Regular.ttf"},
+		)
 	case pb.DriverEnum_Audio:
 		driver = base64Captcha.NewDriverAudio(int(length), lang)
 	case pb.DriverEnum_Language:
 		driver = base64Captcha.NewDriverLanguage(int(height), int(width), 0, base64Captcha.OptionShowHollowLine, int(length), nil, nil, nil, lang)
 	default:
-		driver = base64Captcha.NewDriverDigit(int(height), int(width), int(length), 0.7, 80)
+		maxSkew := 0.7
+		if req.GetMaxSkew() > 0 {
+			maxSkew = req.GetMaxSkew()
+		}
+		dotCount := 80
+		if req.GetDotCount() > 0 {
+			dotCount = int(req.GetDotCount())
+		}
+		driver = base64Captcha.NewDriverDigit(int(height), int(width), int(length), maxSkew, dotCount)
 	}
 
 	captcha := base64Captcha.NewCaptcha(driver, RedisStore)
